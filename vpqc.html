@@ -61,39 +61,29 @@
     }
 
     function updateQuantumClock() {
-      let clockState = "";
-      for(let i = 0; i < 5; i++) {
-        clockState += rollQuantumDie();
-      }
-      document.getElementById('quantumClockContainer').innerText = "Quantum Clock: " + clockState;
+      const currentTime = new Date();
+      let hours = currentTime.getHours().toString().padStart(2, '0');
+      let minutes = currentTime.getMinutes().toString().padStart(2, '0');
+      let seconds = currentTime.getSeconds().toString().padStart(2, '0');
+      let timeString = hours + ":" + minutes + ":" + seconds;
+
+      // Mapping to a quantum state
+      let quantumTime = timeString.split("").map(d => d === ":" ? ":" : rollQuantumDie()).join("");
+      document.getElementById('quantumClockContainer').innerText = "Quantum Clock: " + quantumTime;
     }
 
     function getResponse() {
       let quantumField = '';
       let i = 0;
-      let catAliveCounter = 0;
-      let catDeadCounter = 0;
-      let hamzatCatState = ['O', '1', '2']; // Using qutrits for Hamzat's cat
-
       const interval = setInterval(function() {
         if (i >= 4000) {
           clearInterval(interval);
           quantumField = fusionProcessor(quantumField);
           quantumField = nanoCompiler(quantumField);
           virtualQuantumHumanVoiceEmulator(quantumField);
-
-          const schrodingerCatStatus = catAliveCounter > catDeadCounter ? "Alive" : "Dead";
-          const hamzatCatStatus = hamzatCatState[Math.floor(Math.random() * 3)]; // Could be 'O', '1', or '2'
-          
-          console.log(`Schrodinger's Cat is ${schrodingerCatStatus}`);
-          console.log(`Hamzat's Cat is in state ${hamzatCatStatus}`);
-
         } else {
-          const isCatAlive = Math.random() > 0.5;
-          isCatAlive ? catAliveCounter++ : catDeadCounter++;
           quantumField += rollQuantumDie();
           document.getElementById('quantumFieldContainer').innerText = nanoCompiler(quantumField);
-          localStorage.setItem('quantumField', quantumField);
         }
         i++;
       }, 50);
