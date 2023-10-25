@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Virtual Quantum Chatbot with Schrödinger's Cat and Hamzat's Cat</title>
+  <title>Virtual Quantum Chatbot</title>
   <style>
     body {
       font-family: "Times New Roman", Times, serif;
@@ -18,7 +18,7 @@
       top: 30%;
       width: 100%;
       height: 60%;
-      overflow: auto;  /* Scrollable */
+      overflow: auto;
       overflow-wrap: break-word;
       white-space: pre-wrap;
       z-index: 1;
@@ -28,7 +28,7 @@
 <body>
 
   <div id="container">
-    <h1>Virtual Quantum Chatbot with Schrödinger's Cat and Hamzat's Cat</h1>
+    <h1>Virtual Quantum Chatbot</h1>
     <input type="text" id="user_input" placeholder="Type your query...">
     <button onclick="getResponse()">Ask</button>
     <div id="output">Quantum Field</div>
@@ -49,7 +49,7 @@
     }
 
     function rollQuantumDie() {
-      const faces = ['O', '1', '2']; // Now using qutrits for Hamzat's Cat
+      const faces = ['O', '1', '2'];
       return faces[Math.floor(Math.random() * 3)];
     }
 
@@ -65,23 +65,18 @@
       let catDeadCounter = 0;
 
       const interval = setInterval(function() {
-        // Check both cats' status 4000 times
         const isCatAlive = Math.random() > 0.5;
         isCatAlive ? catAliveCounter++ : catDeadCounter++;
-
+        
         if (i >= 4000) {
           const catStatus = catAliveCounter > catDeadCounter ? "Alive" : "Dead";
-          document.getElementById('output').innerText = `Quantum Field and Both Cats are ${catStatus}`;
-
-          // Run the fusion processor after checking 4000 times
+          document.getElementById('output').innerText = `Quantum Field and the Cat is ${catStatus}`;
           asciiArt = fusionProcessor(asciiArt);
-          virtualQuantumHumanVoiceEmulator(asciiArt); // Play modulated voice
+          virtualQuantumHumanVoiceEmulator(catStatus);
         } else {
           asciiArt += rollQuantumDie();
           const processedField = nanoCompiler(asciiArt);
           document.getElementById('quantumFieldContainer').innerText = processedField;
-
-          // Store in Virtual Quantum Storage (localStorage)
           localStorage.setItem('quantumField', processedField);
         }
 
@@ -90,7 +85,6 @@
       }, 50);
     }
 
-    // Retrieve from Virtual Quantum Storage and display if exists
     if (localStorage.getItem('quantumField')) {
       document.getElementById('quantumFieldContainer').innerText = localStorage.getItem('quantumField');
     }
