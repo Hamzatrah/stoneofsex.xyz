@@ -37,10 +37,12 @@
 
   <script>
     function nanoCompiler(quantumField) {
+      // Aspect 2: Replacement logic
       return quantumField.replace(/[O12]/g, match => match === 'O' ? '1' : match === '1' ? '2' : 'O');
     }
 
     function virtualQuantumHumanVoiceEmulator(text) {
+      // Aspect 3: Voice Emulator
       const speechSynthesis = window.speechSynthesis;
       const utterance = new SpeechSynthesisUtterance(text);
       utterance.rate = Math.random() + 0.5;
@@ -54,37 +56,37 @@
     }
 
     function fusionProcessor(quantumField) {
+      // Aspect 4: Fusion Processor
       return quantumField.split("").sort().join("");
     }
 
     function getResponse() {
-      const user_input = document.getElementById('user_input').value;
       let asciiArt = '';
       let i = 0;
       let catAliveCounter = 0;
       let catDeadCounter = 0;
 
       const interval = setInterval(function() {
-        // Check cat's status 4000 times
         const isCatAlive = Math.random() > 0.5;
         isCatAlive ? catAliveCounter++ : catDeadCounter++;
 
-        if (i >= 4000) {
+        if (i === 4000) {
+          // Aspect 1: Update Status after 4000 iterations
           const catStatus = catAliveCounter > catDeadCounter ? "Alive" : "Dead";
           document.getElementById('output').innerText = `Quantum Field and Schrödinger's Cat is ${catStatus}`;
-
-          // Run the fusion processor after checking 4000 times
-          asciiArt = fusionProcessor(asciiArt);
-          virtualQuantumHumanVoiceEmulator(asciiArt);
-        } else {
+          
+          asciiArt = fusionProcessor(asciiArt);  // Process after 4000 checks
+          virtualQuantumHumanVoiceEmulator(asciiArt);  // Invoke voice emulator
+          
+          // Store in Virtual Quantum Storage (localStorage)
+          localStorage.setItem('quantumField', asciiArt);
+          localStorage.setItem('catStatus', catStatus);
+        } else if (i < 4000) {
           asciiArt += rollQuantumDie();
           const processedField = nanoCompiler(asciiArt);
           document.getElementById('quantumFieldContainer').innerText = processedField;
-
-          // Store in Virtual Quantum Storage (localStorage)
-          localStorage.setItem('quantumField', processedField);
         }
-
+        
         i++;
         if (i >= 8000) clearInterval(interval);
       }, 50);
