@@ -13,15 +13,18 @@
       transform: translate(-50%, -50%);
       z-index: 2;
     }
-    #quantumFieldContainer {
+    #quantumFieldContainer, #quantumClockContainer {
       position: fixed;
       top: 30%;
       width: 100%;
       height: 60%;
-      overflow: auto;  /* Scrollable */
+      overflow: auto;
       overflow-wrap: break-word;
       white-space: pre-wrap;
       z-index: 1;
+    }
+    #quantumClockContainer {
+      top: 60%;
     }
   </style>
 </head>
@@ -34,8 +37,14 @@
     <div id="output">Quantum Field</div>
   </div>
   <div id="quantumFieldContainer"></div>
+  <div id="quantumClockContainer">Quantum Clock: </div>
 
   <script>
+    function rollQuantumQutrit() {
+      const states = ['O', '1', '2'];
+      return states[Math.floor(Math.random() * 3)];
+    }
+
     function nanoCompiler(quantumField) {
       return quantumField.replace(/[O12]/g, match => match === 'O' ? '1' : match === '1' ? '2' : 'O');
     }
@@ -48,13 +57,16 @@
       speechSynthesis.speak(utterance);
     }
 
-    function rollQuantumQutrit() {
-      const states = ['O', '1', '2']; // O for Alive, 1 for Dead, 2 for Sleeping
-      return states[Math.floor(Math.random() * 3)];
-    }
-
     function fusionProcessor(quantumField) {
       return quantumField.split("").sort().join("");
+    }
+
+    function updateQuantumClock() {
+      let clockState = "";
+      for(let i = 0; i < 5; i++) {
+        clockState += rollQuantumQutrit();
+      }
+      document.getElementById('quantumClockContainer').innerText = "Quantum Clock: " + clockState;
     }
 
     function getResponse() {
@@ -93,7 +105,12 @@
 
         i++;
       }, 50);
+
+      setInterval(updateQuantumClock, 1000);
     }
+
+    // Initialize the quantum clock
+    updateQuantumClock();
 
     if (localStorage.getItem('quantumField')) {
       document.getElementById('quantumFieldContainer').innerText = localStorage.getItem('quantumField');
