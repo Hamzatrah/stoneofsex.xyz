@@ -29,7 +29,6 @@
   </style>
 </head>
 <body>
-
   <div id="container">
     <h1>Virtual Quantum Chatbot</h1>
     <input type="text" id="user_input" placeholder="Type your query...">
@@ -40,34 +39,29 @@
 
   <script>
     function rollQuantumDie() {
-      const faces = ['O', '1', '2'];
+      const faces = ['0', '1', '2'];
       return faces[Math.floor(Math.random() * 3)];
     }
 
-    function nanoCompiler(quantumField) {
-      return quantumField.replace(/[O12]/g, match => match === 'O' ? '1' : match === '1' ? '2' : 'O');
-    }
+    function generateMelody(quantumField) {
+      const audioContext = new AudioContext();
+      let currentTime = audioContext.currentTime;
+      let frequencies = [];
 
-    function fusionProcessor(quantumField) {
-      return quantumField.split("").sort().join("");
-    }
+      ['01', '12', '00'].forEach(pattern => {
+        const count = (quantumField.match(new RegExp(pattern, 'g')) || []).length;
+        frequencies.push(200 + count * 10);
+      });
 
-    function playR2D2Sound(quantumField) {
-      const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-      const oscillator = audioContext.createOscillator();
-      const gainNode = audioContext.createGain();
-      oscillator.connect(gainNode);
-      gainNode.connect(audioContext.destination);
-      
-      let frequency = quantumField.length % 1000 + 100; // some formula to vary frequency based on quantumField
-      oscillator.type = 'sine';
-      oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
-      gainNode.gain.setValueAtTime(0, audioContext.currentTime);
-      gainNode.gain.exponentialRampToValueAtTime(1, audioContext.currentTime + 0.1);
-      gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 1);
-      
-      oscillator.start();
-      oscillator.stop(audioContext.currentTime + 1);
+      frequencies.forEach((freq, index) => {
+        const oscillator = audioContext.createOscillator();
+        oscillator.type = 'sine';
+        oscillator.frequency.setValueAtTime(freq, currentTime);
+        oscillator.connect(audioContext.destination);
+        oscillator.start(currentTime);
+        oscillator.stop(currentTime + 5);
+        currentTime += 5;
+      });
     }
 
     function updateQuantumClock() {
@@ -76,7 +70,6 @@
       let minutes = currentTime.getMinutes().toString().padStart(2, '0');
       let seconds = currentTime.getSeconds().toString().padStart(2, '0');
       let timeString = hours + ":" + minutes + ":" + seconds;
-
       let quantumTime = timeString.split("").map(d => d === ":" ? ":" : rollQuantumDie()).join("");
       document.getElementById('quantumClockContainer').innerText = "Quantum Clock: " + quantumTime;
     }
@@ -87,24 +80,18 @@
       const interval = setInterval(function() {
         if (i >= 4000) {
           clearInterval(interval);
-          quantumField = fusionProcessor(quantumField);
-          quantumField = nanoCompiler(quantumField);
-          playR2D2Sound(quantumField);
+          generateMelody(quantumField);
         } else {
           quantumField += rollQuantumDie();
-          document.getElementById('quantumFieldContainer').innerText = nanoCompiler(quantumField);
+          document.getElementById('quantumFieldContainer').innerText = quantumField;
         }
         i++;
       }, 50);
-
+      
       setInterval(updateQuantumClock, 1000);
     }
 
     updateQuantumClock();
-
-    if (localStorage.getItem('quantumField')) {
-      document.getElementById('quantumFieldContainer').innerText = localStorage.getItem('quantumField');
-    }
   </script>
 </body>
 </html>
