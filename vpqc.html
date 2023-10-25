@@ -39,6 +39,11 @@
   <div id="quantumClockContainer">Quantum Clock: </div>
 
   <script>
+        function getResponse() {
+      // Testing the speechSynthesis function
+      const testUtterance = new SpeechSynthesisUtterance("Test speech synthesis");
+      window.speechSynthesis.speak(testUtterance);
+  
     function rollQuantumDie() {
       const faces = ['O', '1', '2'];
       return faces[Math.floor(Math.random() * 3)];
