@@ -18,7 +18,7 @@
       top: 30%;
       width: 100%;
       height: 60%;
-      overflow: auto;
+      overflow: auto;  /* Scrollable */
       overflow-wrap: break-word;
       white-space: pre-wrap;
       z-index: 1;
@@ -48,9 +48,9 @@
       speechSynthesis.speak(utterance);
     }
 
-    function rollQuantumDie() {
-      const faces = ['O', '1', '2'];
-      return faces[Math.floor(Math.random() * 3)];
+    function rollQuantumQutrit() {
+      const states = ['O', '1', '2']; // O for Alive, 1 for Dead, 2 for Sleeping
+      return states[Math.floor(Math.random() * 3)];
     }
 
     function fusionProcessor(quantumField) {
@@ -58,30 +58,40 @@
     }
 
     function getResponse() {
-      const user_input = document.getElementById('user_input').value;
       let asciiArt = '';
       let i = 0;
       let catAliveCounter = 0;
       let catDeadCounter = 0;
+      let catSleepingCounter = 0;
 
       const interval = setInterval(function() {
-        const isCatAlive = Math.random() > 0.5;
-        isCatAlive ? catAliveCounter++ : catDeadCounter++;
+        const qutritState = rollQuantumQutrit();
+        
+        if (qutritState === 'O') catAliveCounter++;
+        else if (qutritState === '1') catDeadCounter++;
+        else catSleepingCounter++;
         
         if (i >= 4000) {
-          const catStatus = catAliveCounter > catDeadCounter ? "Alive" : "Dead";
+          let catStatus;
+          if (catAliveCounter > catDeadCounter && catAliveCounter > catSleepingCounter) {
+            catStatus = "Alive";
+          } else if (catDeadCounter > catAliveCounter && catDeadCounter > catSleepingCounter) {
+            catStatus = "Dead";
+          } else {
+            catStatus = "Sleeping";
+          }
           document.getElementById('output').innerText = `Quantum Field and the Cat is ${catStatus}`;
           asciiArt = fusionProcessor(asciiArt);
-          virtualQuantumHumanVoiceEmulator(catStatus);
+          virtualQuantumHumanVoiceEmulator(catStatus + ". " + asciiArt);
+          clearInterval(interval);
         } else {
-          asciiArt += rollQuantumDie();
+          asciiArt += rollQuantumQutrit();
           const processedField = nanoCompiler(asciiArt);
           document.getElementById('quantumFieldContainer').innerText = processedField;
           localStorage.setItem('quantumField', processedField);
         }
 
         i++;
-        if (i >= 8000) clearInterval(interval);
       }, 50);
     }
 
