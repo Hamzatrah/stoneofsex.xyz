@@ -57,6 +57,7 @@
       const utterance = new SpeechSynthesisUtterance(text);
       utterance.rate = Math.random() + 0.5;
       utterance.pitch = Math.random() * 2;
+       speechSynthesis.cancel(); // Clear any other utterances that might be queued
       speechSynthesis.speak(utterance);
     }
 
