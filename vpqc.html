@@ -52,12 +52,22 @@
       return quantumField.split("").sort().join("");
     }
 
-    function virtualQuantumHumanVoiceEmulator(text) {
-      const speechSynthesis = window.speechSynthesis;
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.rate = Math.random() + 0.5;
-      utterance.pitch = Math.random() * 2;
-      speechSynthesis.speak(utterance);
+    function playR2D2Sound(quantumField) {
+      const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      const oscillator = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
+      oscillator.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+      
+      let frequency = quantumField.length % 1000 + 100; // some formula to vary frequency based on quantumField
+      oscillator.type = 'sine';
+      oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
+      gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(1, audioContext.currentTime + 0.1);
+      gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 1);
+      
+      oscillator.start();
+      oscillator.stop(audioContext.currentTime + 1);
     }
 
     function updateQuantumClock() {
@@ -72,10 +82,6 @@
     }
 
     function getResponse() {
-      // Test speechSynthesis
-      const testUtterance = new SpeechSynthesisUtterance("Test speech synthesis");
-      window.speechSynthesis.speak(testUtterance);
-
       let quantumField = '';
       let i = 0;
       const interval = setInterval(function() {
@@ -83,7 +89,7 @@
           clearInterval(interval);
           quantumField = fusionProcessor(quantumField);
           quantumField = nanoCompiler(quantumField);
-          virtualQuantumHumanVoiceEmulator(quantumField);
+          playR2D2Sound(quantumField);
         } else {
           quantumField += rollQuantumDie();
           document.getElementById('quantumFieldContainer').innerText = nanoCompiler(quantumField);
@@ -94,8 +100,11 @@
       setInterval(updateQuantumClock, 1000);
     }
 
-    // Initialize the quantum clock
     updateQuantumClock();
+
+    if (localStorage.getItem('quantumField')) {
+      document.getElementById('quantumFieldContainer').innerText = localStorage.getItem('quantumField');
+    }
   </script>
 </body>
 </html>
