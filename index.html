@@ -1,53 +1,4 @@
 <!DOCTYPE html>
-</html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/png" href="favicon.png">
-    <script src="script.js"></script>
-    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
-    <title>Stone of Sex</title>
- 
-    <!-- Primary Meta Tags -->
-    <meta name="title" content="Stone of Sex">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://stoneofsex.xyz/">
-    <meta property="og:description" content="Stone of Sex is a composition of six hands coupled in three gestures, set in stone.">
-    <meta property="og:image" content="https://stoneofsex.xyz/meta.jpg">
-    
-    <!-- Tweety Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="https://stoneofsex.xyz/"></meta>
-    <meta name="twitter:title" content="Stone of Sex"> 
-    <meta name="twitter:description" content="Stone of Sex is a composition of six hands coupled in three gestures, set in stone."></meta>
-    <meta name="twitter:creator" content="@hamzateraheem">
-    <meta name="twitter:image:src" content="https://stoneofsex.xyz/meta.jpg">
-
-</head>
-
-<body>
-
-    <div class="container">
-
-        <div class="home-text">
-            <p>
-            <a href="./english.html" class="eng-btn top">EN</a>
-            <a href="./japanese.html" class="jpn-btn left">文</a>
-            <br>
-            <a href="./NFT x SOS.html" class="NFT x SOS-btn top">NFTxSOS</a>  
-        </div>
-        
-<!--        <iframe allowfullscreen webkitallowfullscreen width="640" height="480" frameborder="0" seamless src="https://p3d.in/e/loaWG+spin+load+trackball+controls,loader,border,-hidden"></iframe> -->
- <div class="sketchfab-embed-wrapper"> <iframe title="Stone of Sex" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share width="640" height="480" src="https://sketchfab.com/models/0e69ef54d0b64bf8b2f8a88c83230c4b/embed"> </iframe> <p style="font-size: 13px; font-weight: normal; margin: 5px; color: #4A4A4A;"> <a href="https://sketchfab.com/3d-models/stone-of-sex-0e69ef54d0b64bf8b2f8a88c83230c4b?utm_medium=embed&utm_campaign=share-popup&utm_content=0e69ef54d0b64bf8b2f8a88c83230c4b" target="_blank" style="font-weight: bold; color: #1CAAD9;"> Stone of Sex </a> by <a href="https://sketchfab.com/hamzat?utm_medium=embed&utm_campaign=share-popup&utm_content=0e69ef54d0b64bf8b2f8a88c83230c4b" target="_blank" style="font-weight: bold; color: #1CAAD9;"> hamzat </a> on <a href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=0e69ef54d0b64bf8b2f8a88c83230c4b" target="_blank" style="font-weight: bold; color: #1CAAD9;">Sketchfab</a></p></div> -->
-<!--     <iframe allowfullscreen width="640" height="480" loading="lazy" frameborder="0" src="https://p3d.in/e/loaWG+load+controls-hidden"></iframe> -->
-<!--    <iframe allowfullscreen width="640" height="480" loading="lazy" frameborder="0" src="https://p3d.in/e/loaWG+load+controls,border-hidden"></iframe> -->
-<!--   <iframe allowfullscreen width="640" height="480" loading="lazy" frameborder="0" src="https://p3d.in/e/loaWG+spin+load+controls,border-hidden"></iframe>
-    </div>
-
-</body>
-</html>
-<!DOCTYPE html>
 <html>
 <head>
   <title>Virtual Quantum Chatbot</title>
@@ -110,39 +61,29 @@
     }
 
     function updateQuantumClock() {
-      let clockState = "";
-      for(let i = 0; i < 5; i++) {
-        clockState += rollQuantumDie();
-      }
-      document.getElementById('quantumClockContainer').innerText = "Quantum Clock: " + clockState;
+      const currentTime = new Date();
+      let hours = currentTime.getHours().toString().padStart(2, '0');
+      let minutes = currentTime.getMinutes().toString().padStart(2, '0');
+      let seconds = currentTime.getSeconds().toString().padStart(2, '0');
+      let timeString = hours + ":" + minutes + ":" + seconds;
+
+      // Mapping to a quantum state
+      let quantumTime = timeString.split("").map(d => d === ":" ? ":" : rollQuantumDie()).join("");
+      document.getElementById('quantumClockContainer').innerText = "Quantum Clock: " + quantumTime;
     }
 
     function getResponse() {
       let quantumField = '';
       let i = 0;
-      let catAliveCounter = 0;
-      let catDeadCounter = 0;
-      let hamzatCatState = ['O', '1', '2']; // Using qutrits for Hamzat's cat
-
       const interval = setInterval(function() {
         if (i >= 4000) {
           clearInterval(interval);
           quantumField = fusionProcessor(quantumField);
           quantumField = nanoCompiler(quantumField);
           virtualQuantumHumanVoiceEmulator(quantumField);
-
-          const schrodingerCatStatus = catAliveCounter > catDeadCounter ? "Alive" : "Dead";
-          const hamzatCatStatus = hamzatCatState[Math.floor(Math.random() * 3)]; // Could be 'O', '1', or '2'
-          
-          console.log(`Schrodinger's Cat is ${schrodingerCatStatus}`);
-          console.log(`Hamzat's Cat is in state ${hamzatCatStatus}`);
-
         } else {
-          const isCatAlive = Math.random() > 0.5;
-          isCatAlive ? catAliveCounter++ : catDeadCounter++;
           quantumField += rollQuantumDie();
           document.getElementById('quantumFieldContainer').innerText = nanoCompiler(quantumField);
-          localStorage.setItem('quantumField', quantumField);
         }
         i++;
       }, 50);
