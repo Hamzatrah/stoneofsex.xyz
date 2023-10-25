@@ -34,19 +34,22 @@
     <h1>Virtual Quantum Chatbot</h1>
     <input type="text" id="user_input" placeholder="Type your query...">
     <button onclick="getResponse()">Ask</button>
-    <div id="output">Quantum Field</div>
   </div>
   <div id="quantumFieldContainer"></div>
   <div id="quantumClockContainer">Quantum Clock: </div>
 
   <script>
-    function rollQuantumQutrit() {
-      const states = ['O', '1', '2'];
-      return states[Math.floor(Math.random() * 3)];
+    function rollQuantumDie() {
+      const faces = ['O', '1', '2'];
+      return faces[Math.floor(Math.random() * 3)];
     }
 
     function nanoCompiler(quantumField) {
       return quantumField.replace(/[O12]/g, match => match === 'O' ? '1' : match === '1' ? '2' : 'O');
+    }
+
+    function fusionProcessor(quantumField) {
+      return quantumField.split("").sort().join("");
     }
 
     function virtualQuantumHumanVoiceEmulator(text) {
@@ -57,52 +60,41 @@
       speechSynthesis.speak(utterance);
     }
 
-    function fusionProcessor(quantumField) {
-      return quantumField.split("").sort().join("");
-    }
-
     function updateQuantumClock() {
       let clockState = "";
       for(let i = 0; i < 5; i++) {
-        clockState += rollQuantumQutrit();
+        clockState += rollQuantumDie();
       }
       document.getElementById('quantumClockContainer').innerText = "Quantum Clock: " + clockState;
     }
 
     function getResponse() {
-      let asciiArt = '';
+      let quantumField = '';
       let i = 0;
       let catAliveCounter = 0;
       let catDeadCounter = 0;
-      let catSleepingCounter = 0;
+      let hamzatCatState = ['O', '1', '2']; // Using qutrits for Hamzat's cat
 
       const interval = setInterval(function() {
-        const qutritState = rollQuantumQutrit();
-        
-        if (qutritState === 'O') catAliveCounter++;
-        else if (qutritState === '1') catDeadCounter++;
-        else catSleepingCounter++;
-        
         if (i >= 4000) {
-          let catStatus;
-          if (catAliveCounter > catDeadCounter && catAliveCounter > catSleepingCounter) {
-            catStatus = "Alive";
-          } else if (catDeadCounter > catAliveCounter && catDeadCounter > catSleepingCounter) {
-            catStatus = "Dead";
-          } else {
-            catStatus = "Sleeping";
-          }
-          document.getElementById('output').innerText = `Quantum Field and the Cat is ${catStatus}`;
-          asciiArt = fusionProcessor(asciiArt);
-          virtualQuantumHumanVoiceEmulator(catStatus + ". " + asciiArt);
           clearInterval(interval);
-        } else {
-          asciiArt += rollQuantumQutrit();
-          const processedField = nanoCompiler(asciiArt);
-          document.getElementById('quantumFieldContainer').innerText = processedField;
-          localStorage.setItem('quantumField', processedField);
-        }
+          quantumField = fusionProcessor(quantumField);
+          quantumField = nanoCompiler(quantumField);
+          virtualQuantumHumanVoiceEmulator(quantumField);
 
+          const schrodingerCatStatus = catAliveCounter > catDeadCounter ? "Alive" : "Dead";
+          const hamzatCatStatus = hamzatCatState[Math.floor(Math.random() * 3)]; // Could be 'O', '1', or '2'
+          
+          console.log(`Schrodinger's Cat is ${schrodingerCatStatus}`);
+          console.log(`Hamzat's Cat is in state ${hamzatCatStatus}`);
+
+        } else {
+          const isCatAlive = Math.random() > 0.5;
+          isCatAlive ? catAliveCounter++ : catDeadCounter++;
+          quantumField += rollQuantumDie();
+          document.getElementById('quantumFieldContainer').innerText = nanoCompiler(quantumField);
+          localStorage.setItem('quantumField', quantumField);
+        }
         i++;
       }, 50);
 
