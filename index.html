@@ -1,102 +1,49 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Virtual Quantum Chatbot</title>
-  <style>
-    body {
-      font-family: "Times New Roman", Times, serif;
-    }
-    #container {
-      position: fixed;
-      top: 10%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 2;
-    }
-    #quantumFieldContainer, #quantumClockContainer {
-      position: fixed;
-      top: 30%;
-      width: 100%;
-      height: 60%;
-      overflow: auto;
-      overflow-wrap: break-word;
-      white-space: pre-wrap;
-      z-index: 1;
-    }
-    #quantumClockContainer {
-      top: 60%;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <script src="script.js"></script>
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <title>Stone of Sex</title>
+ 
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="Stone of Sex">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://stoneofsex.xyz/">
+    <meta property="og:description" content="Stone of Sex is a composition of six hands coupled in three gestures, set in stone.">
+    <meta property="og:image" content="https://stoneofsex.xyz/meta.jpg">
+    
+    <!-- Tweety Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="https://stoneofsex.xyz/"></meta>
+    <meta name="twitter:title" content="Stone of Sex"> 
+    <meta name="twitter:description" content="Stone of Sex is a composition of six hands coupled in three gestures, set in stone."></meta>
+    <meta name="twitter:creator" content="@hamzateraheem">
+    <meta name="twitter:image:src" content="https://stoneofsex.xyz/meta.jpg">
+
 </head>
+
 <body>
 
-  <div id="container">
-    <h1>Virtual Quantum Chatbot</h1>
-    <input type="text" id="user_input" placeholder="Type your query...">
-    <button onclick="getResponse()">Ask</button>
-  </div>
-  <div id="quantumFieldContainer"></div>
-  <div id="quantumClockContainer">Quantum Clock: </div>
+    <div class="container">
 
-  <script>
-    function rollQuantumDie() {
-      const faces = ['O', '1', '2'];
-      return faces[Math.floor(Math.random() * 3)];
-    }
+        <div class="home-text">
+            <p>
+            <a href="./english.html" class="eng-btn top">EN</a>
+            <a href="./japanese.html" class="jpn-btn left">文</a>
+            <br>
+            <a href="./NFT x SOS.html" class="NFT x SOS-btn top">NFTxSOS</a>  
+        </div>
+        
+<!--        <iframe allowfullscreen webkitallowfullscreen width="640" height="480" frameborder="0" seamless src="https://p3d.in/e/loaWG+spin+load+trackball+controls,loader,border,-hidden"></iframe> -->
+<!--     <div class="sketchfab-embed-wrapper"> <iframe title="Stone of Sex" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share width="640" height="480" src="https://sketchfab.com/models/0e69ef54d0b64bf8b2f8a88c83230c4b/embed"> </iframe> <p style="font-size: 13px; font-weight: normal; margin: 5px; color: #4A4A4A;"> <a href="https://sketchfab.com/3d-models/stone-of-sex-0e69ef54d0b64bf8b2f8a88c83230c4b?utm_medium=embed&utm_campaign=share-popup&utm_content=0e69ef54d0b64bf8b2f8a88c83230c4b" target="_blank" style="font-weight: bold; color: #1CAAD9;"> Stone of Sex </a> by <a href="https://sketchfab.com/hamzat?utm_medium=embed&utm_campaign=share-popup&utm_content=0e69ef54d0b64bf8b2f8a88c83230c4b" target="_blank" style="font-weight: bold; color: #1CAAD9;"> hamzat </a> on <a href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=0e69ef54d0b64bf8b2f8a88c83230c4b" target="_blank" style="font-weight: bold; color: #1CAAD9;">Sketchfab</a></p></div> -->
+<!--     <iframe allowfullscreen width="640" height="480" loading="lazy" frameborder="0" src="https://p3d.in/e/loaWG+load+controls-hidden"></iframe> -->
+<!--    <iframe allowfullscreen width="640" height="480" loading="lazy" frameborder="0" src="https://p3d.in/e/loaWG+load+controls,border-hidden"></iframe> -->
+    <iframe allowfullscreen width="640" height="480" loading="lazy" frameborder="0" src="https://p3d.in/e/loaWG+spin+load+controls,border-hidden"></iframe>
+    </div>
 
-    function nanoCompiler(quantumField) {
-      return quantumField.replace(/[O12]/g, match => match === 'O' ? '1' : match === '1' ? '2' : 'O');
-    }
-
-    function fusionProcessor(quantumField) {
-      return quantumField.split("").sort().join("");
-    }
-
-    function virtualQuantumHumanVoiceEmulator(text) {
-      const speechSynthesis = window.speechSynthesis;
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.rate = Math.random() + 0.5;
-      utterance.pitch = Math.random() * 2;
-      speechSynthesis.speak(utterance);
-    }
-
-    function updateQuantumClock() {
-      const currentTime = new Date();
-      let hours = currentTime.getHours().toString().padStart(2, '0');
-      let minutes = currentTime.getMinutes().toString().padStart(2, '0');
-      let seconds = currentTime.getSeconds().toString().padStart(2, '0');
-      let timeString = hours + ":" + minutes + ":" + seconds;
-
-      // Mapping to a quantum state
-      let quantumTime = timeString.split("").map(d => d === ":" ? ":" : rollQuantumDie()).join("");
-      document.getElementById('quantumClockContainer').innerText = "Quantum Clock: " + quantumTime;
-    }
-
-    function getResponse() {
-      let quantumField = '';
-      let i = 0;
-      const interval = setInterval(function() {
-        if (i >= 4000) {
-          clearInterval(interval);
-          quantumField = fusionProcessor(quantumField);
-          quantumField = nanoCompiler(quantumField);
-          virtualQuantumHumanVoiceEmulator(quantumField);
-        } else {
-          quantumField += rollQuantumDie();
-          document.getElementById('quantumFieldContainer').innerText = nanoCompiler(quantumField);
-        }
-        i++;
-      }, 50);
-
-      setInterval(updateQuantumClock, 1000);
-    }
-
-    // Initialize the quantum clock
-    updateQuantumClock();
-
-    if (localStorage.getItem('quantumField')) {
-      document.getElementById('quantumFieldContainer').innerText = localStorage.getItem('quantumField');
-    }
-  </script>
 </body>
 </html>
